@@ -1,0 +1,367 @@
+snippet php
+	<?php
+	${1}
+	?>
+snippet ec
+	echo "${1:string}"${2};
+snippet inc
+	include '${1:file}';${2}
+snippet inc1
+	include_once '${1:file}';${2}
+snippet req
+	require '${1:file}';${2}
+snippet req1
+	require_once '${1:file}';${2}
+# $GLOBALS['...']
+snippet globals
+	$GLOBALS['${1:variable}']${2: = }${3:something}${4:;}${5}
+snippet $_ COOKIE['...']
+	$_COOKIE['${1:variable}']${2}
+snippet $_ ENV['...']
+	$_ENV['${1:variable}']${2}
+snippet $_ FILES['...']
+	$_FILES['${1:variable}']${2}
+snippet $_ Get['...']
+	$_GET['${1:variable}']${2}
+snippet $_ POST['...']
+	$_POST['${1:variable}']${2}
+snippet $_ REQUEST['...']
+	$_REQUEST['${1:variable}']${2}
+snippet $_ SERVER['...']
+	$_SERVER['${1:variable}']${2}
+snippet $_ SESSION['...']
+	$_SESSION['${1:variable}']${2}
+# Start Docblock
+snippet /*
+	/**
+	 * ${1}
+	 **/
+# Class - post doc
+snippet doc_cp
+	/**
+	 * ${1:undocumented class}
+	 *
+	 * @package ${2:default}
+	 * @author ${3:`g:snips_author`}
+	**/${4}
+# Class Variable - post doc
+snippet doc_vp
+	/**
+	 * ${1:undocumented class variable}
+	 *
+	 * @var ${2:string}
+	 **/${3}
+# Class Variable
+snippet doc_v
+	/**
+	 * ${3:undocumented class variable}
+	 *
+	 * @var ${4:string}
+	 **/
+	${1:var} $${2};${5}
+# Class
+snippet doc_c
+	/**
+	 * ${3:undocumented class}
+	 *
+	 * @packaged ${4:default}
+	 * @author ${5:`g:snips_author`}
+	 **/
+	${1:}class ${2:}
+	{${6}
+	} // END $1class $2
+# Constant Definition - post doc
+snippet doc_dp
+	/**
+	 * ${1:undocumented constant}
+	 **/${2}
+# Constant Definition
+snippet doc_d
+	/**
+	 * ${3:undocumented constant}
+	 **/
+	define(${1}, ${2});${4}
+# Function - post doc
+snippet doc_fp
+	/**
+	 * ${1:undocumented function}
+	 *
+	 * @return ${2:void}
+	 * @author ${3:`g:snips_author`}
+	 **/${4}
+# Function signature
+snippet doc_s
+	/**
+	 * ${4:undocumented function}
+	 *
+	 * @return ${5:void}
+	 * @author ${6:`g:snips_author`}
+	 **/
+	${1}function ${2}(${3});${7}
+# Function
+snippet doc_f
+	/**
+	 * ${4:undocumented function}
+	 *
+	 * @return ${5:void}
+	 * @author ${6:`g:snips_author`}
+	 **/
+	${1}function ${2}(${3})
+	{
+		/**
+		 * === Why? ===
+		 * Reduce complexity, document boolean ops etc
+		 * === Naming ===
+		 * Describe accurately without being wishy-washy
+		 * Ensure there's precise opposites
+		 * === Parameters ===
+		 * 7 or less
+		 * Ordering should be input, modify, output
+		 * If take 3+ args from an object, take in the object
+		 * === Tips ===
+		 * Less than 200 lines
+		 * Always return something (initialise return value at the start)
+		 * Barricade with assertions
+		 * Ensure it's cohesive to the functions around it
+		 * Use PPP(Pseudocode Programming Process)
+		 * (FC!)For all conditionals(while, for/foreach, if/else, and/or) add 1. Total should < 10
+		 **/
+		
+		${7}
+	}
+# Header
+snippet doc_h
+	/**
+	 * ${1}
+	 *
+	 * @author ${2:`g:snips_author`}
+	 * @version ${3:$Id$}
+	 * @copyright ${4:$2}, `strftime('%d %B, %Y')`
+	 * @package ${5:default}
+	 **/
+	
+	/**
+	 * Define DocBlock
+	 *//
+# Interface
+snippet doc_i
+	/**
+	 * ${2:undocumented class}
+	 *
+	 * @package ${3:default}
+	 * @author ${4:`g:snips_author`}
+	 **/
+	interface ${1:}
+	{${5}
+	} // END interface $1
+# class ...
+snippet class
+	/**
+	 * ${1}
+	 **/
+	class ${2:ClassName}
+	{
+		/**
+		 * === Why? ===
+		 * Use polymorphism instead of deep type checking
+		 * === Naming ===
+		 * 
+		 * === Parameters ===
+		 * 
+		 * 
+		 * 
+		 * === Tips(subclassing) ===
+		 * Move commonalities as high as possible
+		 * Suspicious of clases w/ only 1 subclass/instance
+		 * Suspicious of no-op over-riding routines
+		 * Avoid Deep inheritance trees 7+/-2
+		 **/
+		${3}
+		function ${4:__construct}(${5:argument})
+		{
+			/**
+			 * Initialise ALL data in the constructor
+			 * Consider a singleton for just one object
+			 */
+			${6:// code...}
+		}
+	}
+# define(...)
+snippet def
+	define('${1}'${2});${3}
+# defined(...)
+snippet def?
+	${1}defined('${2}')${3}
+snippet wh
+	while (${1:/* condition */}) {
+		/**
+		 * Add +1 to functions complexity(FC!)
+		 **/
+		${2:// code...}
+	}
+# do ... while
+snippet do
+	do {
+		/**
+		 * Add +1 to functions complexity(FC!)
+		 **/
+
+		${2:// code... }
+	} while (${1:/* condition */});
+snippet if
+	if (${1:/* condition */}) {
+		/**
+		 * Add +1 to functions complexity(FC!)
+		 * === Ordering ===
+		 * MIN <= i && i <= MAX
+		 * i < MIN || MAX < i As i is outside the bounds
+		 * === Tips ===
+		 * Keep boolean checks simple EX: if(!statusOK) sucks
+		 * Use paranthesis in the if to document
+		 * Write nominal path first
+		 * Think through the end points to avoid >/>= off-by-one errors
+		 * Focus reading on the main flow
+		 * Consider simplifying boolean tests to function calls
+		 **/
+		${2:// code...}
+	}
+snippet ife
+	if (${1:/* condition */}) {
+		/**
+		 * Add +1 to functions complexity(FC!)
+		 * === Ordering ===
+		 * MIN <= i && i <= MAX
+		 * i < MIN || MAX < i As i is outside the bounds
+		 * === Tips ===
+		 * Keep boolean checks simple EX: if(!statusOK) sucks
+		 * Use paranthesis in the if to document
+		 * Write nominal path first
+		 * Think through the end points to avoid >/>= off-by-one errors
+		 * Focus reading on the main flow
+		 * Consider simplifying boolean tests to function calls
+		 **/
+		${2:// code...}
+	} else {
+		/**
+		 * Add +1 to functions complexity(FC!)
+		 * Try to consider all cases, add asserts for cases you didn't plan for
+		 **/
+		${3:// code...}
+	}
+	${4}
+snippet else
+	else {
+		/**
+		 * Add +1 to functions complexity(FC!)
+		 * Try to consider all cases, add asserts for cases you didn't plan for
+		 **/
+		${1:// code...}
+	}
+snippet elseif
+	elseif (${1:/* condition */}) {
+		/**
+		 * Add +1 to functions complexity(FC!)
+		 * Try to consider all cases, add asserts for cases you didn't plan for
+		 **/
+		${2:// code...}
+	}
+# Tertiary conditional
+snippet t
+	/**
+	 * Add +2 to functions complexity(FC!)
+	 **/
+	$${1:retVal} = (${2:condition}) ? ${3:a} : ${4:b};${5}
+snippet switch
+	switch ($${1:variable}) {
+		/**
+		 * === Ordering ===
+		 * Normal case first
+		 * Order cases by frequency
+		 * If cases are of equal importance, choose alphabetical
+		 * === Tips ===
+		 * Adding a new case is trivial, don't default, you loose documentation
+		 * NEVER FORGET BREAKS
+		 **/
+		case '${2:value}':
+		 	/** 
+			 * Add +1 to functions complexity(FC!)
+			 **/
+			${3:// code...}
+			break;
+		${5}
+		default:
+		 	/** 
+			 * Add +1 to functions complexity(FC!)
+			 **/
+			${4:// code...}
+			break;
+	}
+snippet case
+	case '${1:value}':
+		/** 
+		 * Add +1 to functions complexity(FC!)
+		 **/
+		${2:// code...}
+		break;${3}
+snippet for
+	for ($${2:i} = 0; $$2 < ${1:count}; $$2${3:++}) {
+		/**
+		 * === When ===
+		 * Simple activities that don't require internal loop controls
+		 * === Params ===
+		 * Don't monkey with the loop index!
+		 * Meaningful names to avoid loop cross-talk
+		 * === Tips ===
+		 * Add +1 to functions complexity(FC!)
+		 * Avoid code that depends on the loop indexes final value
+		 * Consider safety counters, so you don't go over a limit
+		 * Be wary of scattered breaks
+		 * Less than 20 lines
+		 * Less than 3 nested-levels deep
+		 **/
+		${4: // code...}
+	}
+
+snippet foreach
+	foreach ($${1:variable} as $${2:key}) {
+		/**
+		 * === When ===
+		 * Performing ops on data structures
+		 * === Tips ===
+		 * Add +1 to functions complexity(FC!)
+		 * Treat as a routine, do as little as possible outside the loop
+		 * Keep loop init statements near the loop
+		 * Be wary of scattered breaks
+		 * Meaningful names to avoid loop cross-talk
+		 * Less than 20 lines
+		 * Move innards of loops to routines
+		 * Less than 3 nested-levels deep
+		 **/
+		${3:// code...}
+	}
+snippet fun
+	${1:public }function ${2:FunctionName}(${3})
+	{
+		/**
+		 * === Why? ===
+		 * Reduce complexity, document boolean ops etc
+		 * === Naming ===
+		 * Describe accurately without being wishy-washy
+		 * Ensure there's precise opposites
+		 * === Parameters ===
+		 * 7 or less
+		 * Ordering should be input, modify, output
+		 * If take 3+ args from an object, take in the object
+		 * === Tips ===
+		 * Less than 200 lines
+		 * Always return something (initialise return value at the start)
+		 * Barricade with assertions
+		 * Ensure it's cohesive to the functions around it
+		 * Use PPP(Pseudocode Programming Process)
+		 * (FC!)For all conditionals(while, for/foreach, if/else, and/or) add 1. Total should < 10
+		 **/
+		${4:// code...}
+	}
+# $... = array (...)
+snippet array
+	$${1:arrayName} = array('${2}' => ${3});${4}
